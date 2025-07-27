@@ -16,7 +16,7 @@ const TaskForm = () => {
                     <option value="doing">Doing</option>
                     <option value="done">Done</option>
                 </select>
-                <button type='sunbit' className='task_sumbit'>+ Add Task</button>
+                <button type='sunbit' className='task_sumbit'>+ Add </button>
             </div>
         </form>
     </header>
