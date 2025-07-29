@@ -1,6 +1,7 @@
 import React from 'react'
 import Todo from "../assets/direct-hit.png"
 import "../Components/TaskColume.css"
+import TaskCard from './TaskCard'
 
 const TaskColume = ({title,icon}) => {
     console.log(title)
@@ -10,6 +11,7 @@ const TaskColume = ({title,icon}) => {
             <img src={icon} alt="image Error" className='task_column_icon' /> 
             {title}
         </h2>
+        <TaskCard/>
     </section>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import {React} from 'react'
 import "../Components/TaskFrom.css"
 import Tag from './Tag'
 const TaskForm = () => {
