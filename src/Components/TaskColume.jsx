@@ -4,7 +4,6 @@ import "../Components/TaskColume.css"
 import TaskCard from './TaskCard'
 
 const TaskColume = ({title,icon}) => {
-    console.log(title)
   return (
     <section className='task_column'>
         <h2 className='task_column_heading'>
