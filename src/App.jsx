@@ -1,18 +1,20 @@
-import {useState} from 'react'
-import "../src/App.css"
+import React, {useState} from 'react'
+import "./App.css"
 import TaskForm from './Components/TaskForm'
-import TaskColume from './Components/TaskColume'
-import TodoIcon from './assets/direct-hit.png'
-import DoingIcon from './assets/glowing-star.png'
-import DoneIcon from './assets/check-mark-button.png'
+import TaskColumn from './Components/TaskColumn'
+import todoIcon from './assets/direct-hit.png'
+import doingIcon from './assets/glowing-star.png'
+import doneIcon from './assets/check-mark-button.png'
+
 const App = () => {
+  const [tasks,setTasks] = useState([])
   return (
     <div className='app'>
-      <TaskForm/>
+      <TaskForm setTasks={setTasks}/>
       <main className='app_main'>
-        <TaskColume title="To Do" icon={TodoIcon}/>
-        <TaskColume title="Doing" icon={DoingIcon}/>
-        <TaskColume title="Done" icon={DoneIcon}/>
+        <TaskColumn title="To do" icon={todoIcon} tasks={tasks} status="todo"/>
+        <TaskColumn title="Doing" icon={doingIcon} tasks={tasks}  status="doing"/>
+        <TaskColumn title="Done" icon={doneIcon} tasks={tasks}  status="done"/>
       </main>
     </div>
   )

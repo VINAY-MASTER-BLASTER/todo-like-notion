@@ -1,74 +1,77 @@
-import {useState} from 'react'
-import '../Components/TaskFrom.css'
+import React,{useState} from 'react'
+import "./TaskForm.css"
 import Tag from './Tag'
-const TaskForm = () => {
-  const [Taskdata,Settaskdata] = useState({
-    Task : "",
-    Status: "todo",
-    Tags:[]
-  })
-  const CheckTag = (Tag) =>{
-    return Taskdata.Tags.some(item => item === Tag)
-  }
-  const SelectTag = (Tag) =>{
-    if(Taskdata.Tags.some(item => item === Tag)){
-      const filtertag = Taskdata.Tags.filter(item => item !== Tag )
-      Settaskdata((Prev) => {
-        return {...Prev, Tags : filtertag}
-      })
-    }else{
-      Settaskdata((Prev) => {
-        return {...Prev, Tags:[...Prev.Tags, Tag]}
-      })
-    }
-  }
-  console.log(Taskdata.Tags)
-  const handleChange = (e) =>{
-    const {name,value} = e.target
 
-    Settaskdata((prev) => {
-      return {...prev, [name] :value}
+const TaskForm = ({setTasks}) => {
+       // Form Handle
+    // const [task,settask] = useState("")
+    // const [status,setStatus] = useState("Todo")
+
+    // const handleTaskChange = e =>{
+    //     settask(e.target.value)
+    // }
+    // const handleStatusChange = e =>{
+    //     setStatus(e.target.value)
+    // }
+    const [taskData,SetTaskData]=useState({
+        task:"",
+        status : "todo",
+        tags:[]
     })
-  }
-  const handlesumit=(e)=>{
-    e.preventDefault();
-    console.log(Taskdata)
-  }
+    const handleChange = (e) =>{
+        const {name,value} = e.target
+        // const name = e.target.name
+        // const value = e.target.value
 
-
-  // const [task,settask] = useState("")
-  // const [status,setstauste] = useState("ToDo")
-
-  // const handleTaskChange = (e) =>{
-  //   settask(e.target.value)
-  // }
-  // const handlestatuschange = (e) =>{
-  //   setstauste(e.target.value)
-  // }
-  // console.log(task,status)
-
+        SetTaskData((Prev)=>{
+            return {...Prev,[name]:value}
+        })
+    }
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        console.log(taskData)
+        setTasks((prev)=>{
+            return {...prev,taskData}
+        })
+    }
+     const selectTag = (tag) =>{
+        if(taskData.tags.some(item => item===tag)){
+           const filterTags =  taskData.tags.filter(item => item !== tag)
+           SetTaskData((prev)=>{
+            return {...prev,tags:filterTags}
+           })
+        }else{
+            SetTaskData((prev)=>{
+                return {...prev,tags:[...prev.tags, tag]}
+            })
+        }
+    }
+    const CheckTag = (tag) =>{
+        return taskData.tags.some(item => item === tag)
+    }
   return (
-    <header className='app_header'>
-        <form onSubmit={handlesumit}>
-            <input type="text" className='task_input' name="Task" placeholder='Enter Your Task' onChange={handleChange}/>
-            <div className='task_form_bottom_line'>
-              <div>
-                <Tag tagName="HTML" SelectTag={SelectTag} Selected={CheckTag("HTML")}/>
-                <Tag tagName="CSS" SelectTag={SelectTag} Selected={CheckTag("CSS")}/>
-                <Tag tagName="JavaScript" SelectTag={SelectTag} Selected={CheckTag("JavaScript")}/>
-                <Tag tagName="React" SelectTag={SelectTag} Selected={CheckTag("React")}/>
-                </div>
+     <header className='app_header'>
+        <form onSubmit={handleSubmit}>
+            <input type="text"name='task' className='task_input' placeholder='Enter Your Task' onChange={handleChange}/>
+
+            <div className="task_form_bottom_line">
                 <div>
-                <select name="Status" className='task_status' onChange={handleChange}>
-                    <option value="todo">To do</option>
-                    <option value="doing">Doing</option>
-                    <option value="done">Done</option>
-                </select>
-                <button type='sunbit' className='task_sumbit'>+ Add Task</button>
-                </div>
+                <Tag tagName="HTML" selectTag={selectTag} selected={CheckTag}/>
+                <Tag tagName="CSS" selectTag={selectTag} selected={CheckTag}/>
+                <Tag tagName="JavaScript" selectTag={selectTag} selected={CheckTag}/>
+                <Tag tagName="React" selectTag={selectTag} selected={CheckTag}/>
+            </div>
+            <div>
+            <select className='task_status' name='status' onChange={handleChange}>
+                <option value="todo">To do</option>
+                <option value="doing">Doing</option>
+                <option value="done">Done</option>
+            </select>
+            <button type='submit' className="task_sumbit">+ Add Task</button>
+            </div>
             </div>
         </form>
-    </header>
+     </header>
   )
 }
 

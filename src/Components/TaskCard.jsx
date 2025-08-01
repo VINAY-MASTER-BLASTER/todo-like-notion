@@ -1,24 +1,23 @@
 import React from 'react'
-import Tag from './Tag'
-import './TaskCard.css'
+import "./TaskCard.css"
 import deleteIcon from '../assets/delete.png'
+import Tag from './Tag'
 
-const TaskCard = () => {
+const TaskCard = ({title,tags}) => {
+  console.log(title,tags)
   return (
-    <article className='task_Card'>
-        <p className='Task_Text'>this is simple text</p>
-        <div className='task_card_botton_line'>
-            <div className='task_card_tags'>
-                <Tag tagName="HTML"/>
-                <Tag tagName="CSS"/>
-                <Tag tagName="Javascript"/>
-                <Tag tagName="React"/>
+    <article className='task_card'>
+        <p className='task_text'>{title}</p>
+        <div className='task_card_bottom_line'>
+            <div className="task_card_tags">
+                {
+                 tags.map((tag, index) =>( <Tag key={index} tagName={tag}/>))
+                }
             </div>
-            <div className='Task_delete'>
-                <img src={deleteIcon} className='delete_icon' alt="" />
+            <div className="task_delete">
+                <img src={deleteIcon} className='delete_icon' alt="Error" />
             </div>
         </div>
-
     </article>
   )
 }
